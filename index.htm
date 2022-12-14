@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+           Reaction Test
+        </title>
+        <style type="text/css">
+            body{
+                font-family: sans-serif;
+            }
+
+            #skill{
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                background-color: red;
+                display: none;
+                position: relative;
+            }
+            .bold{
+                font-weight: bold;
+            }
+
+
+        </style>
+
+    </head>
+    <body>
+        <h1>Test Your Reaction</h1>
+        <p>Click on the circle fast you can</p>
+       <p class="bold">Your Time:<span id="timeTaken"></span></p> 
+      <div id="skill"></div>
+
+        <script type="text/javascript">
+            var start = new Date().getTime()
+            function getRandomColor() {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+                }
+
+
+            function skillAppear(){
+                var top = Math.random()*400;
+                var left = Math.random()*400;
+                document.getElementById("skill").style.backgroundColor= getRandomColor();
+                document.getElementById("skill").style.top = top + "px";
+                document.getElementById("skill").style.left = left + "px";
+                document.getElementById("skill").style.display="block";
+                start = new Date().getTime()
+                
+            }
+            function appearAgain(){
+
+                setTimeout(skillAppear, Math.random()*2000)
+            }
+
+            appearAgain();
+            
+            document.getElementById("skill").onclick = function(){
+                document.getElementById("skill").style.display ="none";
+                var end = new Date().getTime()
+                var timeTaken= end-start;
+                document.getElementById("timeTaken").innerHTML = timeTaken + "ms";
+                 
+                appearAgain();
+            }
+        </script>
+    </body>    
+</html>
